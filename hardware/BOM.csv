@@ -1,0 +1,14 @@
+Ref,Wert,Gehaeuse,Hersteller-Nr.,Bezugsquelle,Menge pro Board
+R1,10 MOhm 1%,0805,SMD-0805 10.0M,Reichelt,1
+R2,1 MOhm 1%,0805,Panasonic ERJ-6ENF1004V,Reichelt,1
+R3,1 kOhm 1%,0805,SMD-0805 1.00K,Reichelt,1
+C1,10 nF C0G 50 V,0805,Murata GRM2195C1H103J,Reichelt,1
+C2,100 nF X7R 50 V,0805,Samsung CL21B104KBCNNNC,Reichelt,1
+D1;D2,1N4148W,SOD-123,Diotec 1N4148W,Reichelt,2
+U1,MCP6002-I/SN,SOIC-8,Microchip MCP6002-I/SN,Reichelt,1
+U2,LM4040 2.5 V,SOT-23,LM4040DIM3-2.5,Reichelt,1
+P1,Leiterplattenklemme 2-pol. RM 5.08,THT,Phoenix SPTH 1.5/2-5.08,Reichelt,1
+P2;P3,Buchsenleiste 1x8 2.54,THT,MPE 094-1-008,Reichelt,2
+P4-P7;TP1-TP4,Stiftleiste 1x40 2.54 (gebrochen),THT,ECON SL40G1,Reichelt,1
+ADC,ADS1220-Modul 24 Bit,Modul,-,AliExpress,1
+PCB,2 Lagen 1.6 mm HASL bleifrei,68.6x53.3 mm,-,JLCPCB,1
