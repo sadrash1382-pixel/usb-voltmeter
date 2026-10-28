@@ -1,0 +1,34 @@
+# --- Altium ---
+History/
+Project Logs for */
+Project Outputs for */
+__Previews/
+*.PrjPcbStructure
+*.SchDocPreview
+*.PcbDocPreview
+*.LOG
+*.Cam
+*.htm
+~$*
+ 
+# --- LTspice ---
+*.raw
+*.log
+*.net
+*.op.raw
+*.fft
+ 
+# --- Arduino / PlatformIO ---
+build/
+.pio/
+ 
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+ 
+# --- System ---
+.DS_Store
+Thumbs.db
+desktop.ini
