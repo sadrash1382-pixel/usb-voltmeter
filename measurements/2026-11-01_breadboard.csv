@@ -1,0 +1,8 @@
+# ADS1220-Modul auf Breadboard, Arduino Uno (USB-versorgt), AIN0 gegen AVSS, PGA aus, Gain 1, interne Referenz 2,048 V, 20 SPS, 50/60-Hz-Filter
+# Je Zeile im seriellen Monitor: Mittelwert und Standardabweichung aus N = 20 Einzelwerten (ca. 1 s)
+# n_zeilen = Anzahl ausgewerteter Zeilen; sigma_einzel_uV = RMS der Zeilen-Standardabweichungen; spanne_mittelwerte_uV = max - min der Zeilenmittelwerte
+eingang,quelle,n_zeilen,mittelwert_mV,sigma_einzel_uV,spanne_mittelwerte_uV,vc97_mV
+kurzschluss,Draht AIN0 -> DGND,10,-0.3177,3.46,3.6,
+0 V,Netzteil SPE3051 auf 0.000 V,21,-2.0584,27.89,64.1,
+0.5 V,Netzteil SPE3051 auf 0.500 V,13,499.9425,23.53,44.3,500
+1.8 V,Netzteil SPE3051 auf 1.800 V,7,1802.0251,24.67,66.8,

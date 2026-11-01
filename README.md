@@ -8,7 +8,7 @@ Das Projekt deckt die komplette Entwicklungskette ab:
 **Spezifikation → Simulation (LTspice) → Schaltplan & Layout (Altium) → Fertigung (JLCPCB)
 → Firmware → Kalibrierung & messtechnische Verifikation (Python/SCPI).**
  
-> Status: 🟡 Platine in Fertigung – Firmware und Messungen in Arbeit
+> Status: 🟡 Platine in Fertigung – ADS1220 auf dem Breadboard in Betrieb genommen, SCPI-Firmware in Arbeit
  
 ![Shield 3D-Ansicht](docs/img/shield_3d.png)
  
@@ -81,11 +81,29 @@ Dateien und Plots: [`simulation/`](simulation/)
  
 ## Firmware
  
-TODO – ADS1220-Ansteuerung, SCPI-Parser (`*IDN?`, `MEAS:VOLT:DC?`)
+| Sketch | Zweck |
+|---|---|
+| [`firmware/spi_diagnose`](firmware/spi_diagnose) | SPI-Test ohne Library: Register schreiben/zurücklesen, läuft in Schleife zum Messen mit dem Oszilloskop |
+| [`firmware/ads1220_test`](firmware/ads1220_test) | Messung AIN0 gegen AVSS, Ausgabe von Mittelwert und Rauschen |
+
+TODO – SCPI-Parser (`*IDN?`, `MEAS:VOLT:DC?`), Python/PyVISA-Steuerung
  
 ## Messergebnisse
  
-TODO – Kalibrierung, Linearität, Rauschen/effektive Auflösung, Vergleich mit Simulation
+### Breadboard-Test des ADS1220 → [ausführlich](docs/breadboard-test.md)
+
+| Messung | Ergebnis |
+|---|---|
+| Rauschen, Eingang kurzgeschlossen (20 SPS) | **3,5 µV<sub>rms</sub>** (Datenblatt: 3,89 µV<sub>rms</sub>) |
+| Effektive Auflösung (2,048 V Bereich) | **≈ 19,2 Bit** rms, ≈ 16,5 Bit rauschfrei |
+| Rauschen mit Labornetzteil am Eingang | ≈ 25 µV<sub>rms</sub> → von der Quelle dominiert |
+| 0,5 V vom Netzteil | 499,94 mV (Multimeter: 500 mV) |
+
+Bei der Inbetriebnahme wurde ein Kontaktfehler auf der MISO-Leitung mit dem
+Oszilloskop eingegrenzt: SPI-Signale Schritt für Schritt vom Uno bis zum Chip und
+zurück verfolgt.
+
+TODO – Kalibrierung und Linearität auf der fertigen Platine (mit Tischmultimeter als Referenz)
  
 ## Repository-Struktur
  
