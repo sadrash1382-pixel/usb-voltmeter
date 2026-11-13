@@ -112,9 +112,12 @@ $$\text{ENOB} = \log_2\frac{20\ \text{V}}{80\ \mu\text{V}} \approx 17{,}9\ \text
    und Flux-Reste reichen dafür. Der Offset wanderte entsprechend über Nacht um
    0,8 mV. → **Rev. 2: Low-Leakage-Klemmdioden** (z. B. BAV199, pA-Bereich) und
    gründliche Reinigung.
-2. **Polung kleiner SMD-Dioden nicht nach Augenmaß bestücken.** Der Kathodenstrich der
-   SOD-123-Diode war kaum zu erkennen, D2 wurde verpolt eingelötet. Sicherer: Diode vor
-   dem Einlöten mit dem Diodentest des Multimeters ausmessen und die Kathode markieren.
+2. **Polung nach dem Einlöten in der Schaltung prüfen.** Der Kathodenstrich der
+   SOD-123-Diode war kaum zu erkennen. Die Kathode wurde vorher per Diodentest
+   bestimmt und markiert, D2 landete trotzdem verpolt auf der Platine. Beim Hantieren
+   mit der Pinzette ist die Orientierung schnell verloren. Deshalb gehört nach dem
+   Löten und vor dem ersten Einschalten ein Diodentest direkt auf der Platine dazu
+   (z. B. NODE → +5 V muss ≈ 0,6 V zeigen, +5 V → NODE „OL“).
 3. **Messpunkte im Layout haben sich gelohnt.** TP1/TP2 und die Vorgabe, ohne ADC-Modul
    zu starten, haben jeden Fehler auf eine Stufe eingegrenzt, bevor das Modul gefährdet war.
 4. **Stecker und Buchsen sind die häufigste Fehlerquelle.** Wie schon beim
