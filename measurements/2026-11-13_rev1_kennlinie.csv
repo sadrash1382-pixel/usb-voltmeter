@@ -1,0 +1,10 @@
+# USB-Voltmeter Platine Rev. 1, Firmware voltmeter_rev1 (PGA an, 20 SPS, je Zeile Mittel aus N = 10 Wandlungen)
+# Quelle: Labornetzteil SPE3051 an P1, Referenz: Handmultimeter VC97 parallel an P1
+# v_kal_V = v_roh_V + KAL_B mit KAL_B = -0.0171 V (Offset aus Kurzschluss), KAL_A = 1
+# vc97_aufloesung_V = Anzeigeaufloesung des VC97 im genutzten Bereich (4-V-Bereich 1 mV, 40-V-Bereich 10 mV)
+eingang,n_zeilen,v_roh_V,v_kal_V,sigma_eingang_uV,vc97_V,vc97_aufloesung_V,abweichung_mV
+Kurzschluss,6,0.01710,0.00000,92,,,
+Netzteil 1 V,6,1.01561,0.99851,78,1.000,0.001,-1.5
+Netzteil 3.9 V,6,3.91766,3.90056,77,3.908,0.001,-7.4
+Netzteil 5 V,4,5.01727,5.00017,89,5.00,0.01,0.2
+Netzteil 9 V,4,9.01803,9.00093,73,9.01,0.01,-9.1

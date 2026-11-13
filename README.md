@@ -8,7 +8,7 @@ Das Projekt deckt die komplette Entwicklungskette ab:
 **Spezifikation → Simulation (LTspice) → Schaltplan & Layout (Altium) → Fertigung (JLCPCB)
 → Firmware → Kalibrierung & messtechnische Verifikation (Python/SCPI).**
  
-> Status: 🟡 Platine in Fertigung – ADS1220 auf dem Breadboard in Betrieb genommen, SCPI-Firmware in Arbeit
+> Status: 🟢 Platine Rev. 1 in Betrieb und offset-kalibriert – SCPI-Firmware und Verstärkungskalibrierung in Arbeit
  
 ![Shield 3D-Ansicht](docs/img/shield_3d.png)
  
@@ -85,6 +85,7 @@ Dateien und Plots: [`simulation/`](simulation/)
 |---|---|
 | [`firmware/spi_diagnose`](firmware/spi_diagnose) | SPI-Test ohne Library: Register schreiben/zurücklesen, läuft in Schleife zum Messen mit dem Oszilloskop |
 | [`firmware/ads1220_test`](firmware/ads1220_test) | Messung AIN0 gegen AVSS, Ausgabe von Mittelwert und Rauschen |
+| [`firmware/voltmeter_rev1`](firmware/voltmeter_rev1) | Firmware für Platine Rev. 1: Software-SPI (Workaround für Header-Versatz), differentielle Messung OUT − REF, Offset-Kalibrierung |
 
 TODO – SCPI-Parser (`*IDN?`, `MEAS:VOLT:DC?`), Python/PyVISA-Steuerung
  
@@ -103,7 +104,20 @@ Bei der Inbetriebnahme wurde ein Kontaktfehler auf der MISO-Leitung mit dem
 Oszilloskop eingegrenzt: SPI-Signale Schritt für Schritt vom Uno bis zum Chip und
 zurück verfolgt.
 
-TODO – Kalibrierung und Linearität auf der fertigen Platine (mit Tischmultimeter als Referenz)
+### Platine Rev. 1 → [ausführlich](docs/inbetriebnahme-rev1.md)
+
+| Messung | Ergebnis |
+|---|---|
+| Rauschen am Eingang (Einzelwandlung, 20 SPS) | **≈ 80 µV<sub>rms</sub>** |
+| Effektive Auflösung (Messbereich ±10 V) | **≈ 17,9 Bit** |
+| Offset vor / nach Kalibrierung | 17,1 mV / 0 mV |
+| Abweichung zum Handmultimeter VC97 (1–9 V) | ≤ 9 mV, Verstärkung 0,15–0,19 % unter VC97 – innerhalb dessen Unsicherheit |
+
+Rev. 1 hat einen Layoutfehler (Digitalheader 100 mil versetzt), der per Teilbestückung
+und Software-SPI umgangen ist. Vier Bestückungs- und Kontaktfehler wurden über die
+Testpunkte stufenweise eingegrenzt und behoben.
+
+TODO – Verstärkungskalibrierung mit Tischmultimeter, negative Spannungen, Rev. 2
  
 ## Repository-Struktur
  
