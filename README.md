@@ -8,7 +8,7 @@ Das Projekt deckt die komplette Entwicklungskette ab:
 **Spezifikation → Simulation (LTspice) → Schaltplan & Layout (Altium) → Fertigung (JLCPCB)
 → Firmware → Kalibrierung & messtechnische Verifikation (Python/SCPI).**
  
-> Status: 🟢 Platine Rev. 1 in Betrieb und offset-kalibriert – SCPI-Firmware und Verstärkungskalibrierung in Arbeit
+> Status: 🟢 Platine Rev. 1 in Betrieb, per SCPI/PyVISA fernsteuerbar – Verstärkungskalibrierung und Rev. 2 offen
  
 ![Shield 3D-Ansicht](docs/img/shield_3d.png)
  
@@ -86,8 +86,11 @@ Dateien und Plots: [`simulation/`](simulation/)
 | [`firmware/spi_diagnose`](firmware/spi_diagnose) | SPI-Test ohne Library: Register schreiben/zurücklesen, läuft in Schleife zum Messen mit dem Oszilloskop |
 | [`firmware/ads1220_test`](firmware/ads1220_test) | Messung AIN0 gegen AVSS, Ausgabe von Mittelwert und Rauschen |
 | [`firmware/voltmeter_rev1`](firmware/voltmeter_rev1) | Firmware für Platine Rev. 1: Software-SPI (Workaround für Header-Versatz), differentielle Messung OUT − REF, Offset-Kalibrierung |
+| [`firmware/voltmeter_scpi`](firmware/voltmeter_scpi) | **SCPI-Firmware:** misst auf Anfrage (`*IDN?`, `MEAS:VOLT:DC?`, `CALC:SDEV?`), Mittelung und Kalibrierung per Befehl, Kalibrierung im EEPROM, SCPI-Fehlerspeicher |
 
-TODO – SCPI-Parser (`*IDN?`, `MEAS:VOLT:DC?`), Python/PyVISA-Steuerung
+Befehlsübersicht und Automatisierung: [`docs/scpi-automatisierung.md`](docs/scpi-automatisierung.md)
+
+**Python/PyVISA:** [`scripts/kennlinie.py`](scripts/kennlinie.py) steuert Labornetzteil (OWON SPE3051) und Voltmeter gemeinsam per SCPI, fährt eine Spannungsrampe und erzeugt CSV und Linearitätsplot.
  
 ## Messergebnisse
  
@@ -116,6 +119,18 @@ zurück verfolgt.
 Rev. 1 hat einen Layoutfehler (Digitalheader 100 mil versetzt), der per Teilbestückung
 und Software-SPI umgangen ist. Vier Bestückungs- und Kontaktfehler wurden über die
 Testpunkte stufenweise eingegrenzt und behoben.
+
+### Automatisierte Kennlinie → [ausführlich](docs/scpi-automatisierung.md)
+
+![Automatische Kennlinie](docs/img/rev1/kennlinie_auto.png)
+
+| Messung | Ergebnis |
+|---|---|
+| Nichtlinearität 0 … 9 V (gegen Netzteil-Sollwert) | **max. 0,88 mV, RMS 0,43 mV** (Obergrenze, enthält Netzteilfehler) |
+| Abweichung vom Netzteil-Sollwert | −2,5 … −0,3 mV |
+
+Nebenbefund: Das Voltmeter ist genauer als die interne Spannungsmessung des
+Netzteils (10-mV-Raster, Fehler bis −50 mV).
 
 TODO – Verstärkungskalibrierung mit Tischmultimeter, negative Spannungen, Rev. 2
  
