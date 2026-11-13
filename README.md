@@ -126,7 +126,7 @@ Testpunkte stufenweise eingegrenzt und behoben.
 
 | Messung | Ergebnis |
 |---|---|
-| Nichtlinearität 0 … 9 V (gegen Netzteil-Sollwert) | **max. 0,88 mV, RMS 0,43 mV** (Obergrenze, enthält Netzteilfehler) |
+| Nichtlinearität 0 … 9 V (gegen Netzteil-Sollwert) | **< 1 mV max., RMS 0,44 mV** in zwei Läufen, Obergrenze (Muster deutet auf den Netzteil-DAC) |
 | Abweichung vom Netzteil-Sollwert | −2,5 … −0,3 mV |
 
 Nebenbefund: Das Voltmeter ist genauer als die interne Spannungsmessung des

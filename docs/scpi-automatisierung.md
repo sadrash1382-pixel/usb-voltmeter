@@ -51,16 +51,28 @@ Nichtlinearität. Dafür muss das Netzteil nicht genau sein, nur linear.
 
 ![Automatische Kennlinie](img/rev1/kennlinie_auto.png)
 
-Rohdaten: [`measurements/2026-11-13_kennlinie_auto.csv`](../measurements/2026-11-13_kennlinie_auto.csv)
+Rohdaten: [Lauf 1](../measurements/2026-11-13_kennlinie_auto.csv), [Lauf 2](../measurements/2026-11-13_kennlinie_auto_lauf2.csv) (13 min später, gleiche Einstellungen)
 
 | | Ergebnis |
 |---|---|
-| Nichtlinearität USB-Voltmeter (0 … 9 V, gegen Netzteil-Sollwert) | **max. 0,88 mV, RMS 0,43 mV** |
+| Nichtlinearität USB-Voltmeter (0 … 9 V, gegen Netzteil-Sollwert) | **max. 0,88 / 0,92 mV, RMS 0,43 / 0,44 mV** (Lauf 1 / 2) |
+| Wiederholbarkeit der Restabweichung zwischen beiden Läufen | max. 0,18 mV, RMS 0,08 mV |
 | Abweichung USB-Voltmeter vom Netzteil-Sollwert | −2,5 … −0,3 mV über den ganzen Bereich |
 | Steigung gegenüber Netzteil-Sollwert | +0,019 % |
 
-Die 0,88 mV sind eine **Obergrenze**: Sie enthalten auch die Nichtlinearität des
-Netzteils selbst.
+Die 0,9 mV sind eine **Obergrenze**: Sie enthalten auch die Nichtlinearität des
+Netzteils selbst. Vieles spricht dafür, dass sie größtenteils vom Netzteil stammen:
+
+- Das Muster der Restabweichung ist in beiden Läufen **deckungsgleich** (Unterschied
+  ≤ 0,18 mV). Es ist also systematisch, kein Rauschen. Das Rauschen des Mittelwerts
+  liegt bei ≈ 80 µV / √10 ≈ 25 µV.
+- Die Abweichung **springt** zwischen benachbarten 0,5-V-Schritten um bis zu 1,5 mV
+  (z. B. +0,77 mV bei 0,5 V, −0,68 mV bei 1,0 V). Teiler, Op-Amp und Delta-Sigma-ADC
+  haben dagegen eine glatte Kennlinie. Ein solches Sprungmuster passt eher zum DAC
+  des Netzteils, dessen interne Messung ebenfalls ein Sägezahnmuster zeigt.
+
+Für eine genauere Aussage über das Voltmeter braucht es eine bessere Referenz
+(Kalibrator oder 6½-stelliges Tischmultimeter parallel).
 
 ## Erkenntnisse
 
