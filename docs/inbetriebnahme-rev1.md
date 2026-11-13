@@ -48,7 +48,7 @@ Modul einsetzen.
 | # | Symptom | Diagnose | Ursache | Behebung |
 |---|---|---|---|---|
 | 1 | TP2 (REF) = 4,3 V statt 2,50 V | U1 Pin 5 (REF_RAW) = 2,5 V ✔, U1 Pin 7 = 5 V. Pin 7 und die Leiterbahn darunter haben unterschiedliche Spannung | Lötstelle an U1B (Pin 6/7): Rückkopplung offen, Puffer läuft in die Sättigung | Nachgelötet → TP2 = **2,507 V** |
-| 2 | TP1 (OUT) = 4,68 V bei offenem Eingang | NODE liegt knapp eine Diodenspannung unter +5 V | Fehler an D2/R2 im Eingangsteiler | Behoben → TP1 = **2,509 V** offen, **2,281 V** mit Eingang auf GND (erwartet 2,279 V) |
+| 2 | TP1 (OUT) = 4,68 V bei offenem Eingang | NODE liegt knapp eine Diodenspannung unter +5 V; Diodentest an D2 in Sperrrichtung zeigt Durchlass | Klemmdiode D2 verpolt eingelötet: leitet von +5 V in den Knoten, gegen R2 (1 MΩ) nach REF | D2 umgedreht → TP1 = **2,509 V** offen, **2,281 V** mit Eingang auf GND (erwartet 2,279 V) |
 | 3 | ADC liest −1,2 … −2 V statt −0,23 V bzw. 0 V | TP1/TP2 korrekt, am Modul-Pin AIN0 aber nur 0,2–0,6 V (schwankend) | AIN0 ohne Kontakt zwischen P3 und Modul → Eingang offen | Kontakt hergestellt → V_diff = **−226,4 mV** (erwartet −227 mV) |
 | 4 | – | – | – | PGA eingeschaltet (Gain 1): Der ADC puffert seine Eingänge selbst, die Op-Amps sehen keine Abtastströme |
 
@@ -112,12 +112,15 @@ $$\text{ENOB} = \log_2\frac{20\ \text{V}}{80\ \mu\text{V}} \approx 17{,}9\ \text
    und Flux-Reste reichen dafür. Der Offset wanderte entsprechend über Nacht um
    0,8 mV. → **Rev. 2: Low-Leakage-Klemmdioden** (z. B. BAV199, pA-Bereich) und
    gründliche Reinigung.
-2. **Messpunkte im Layout haben sich gelohnt.** TP1/TP2 und die Vorgabe, ohne ADC-Modul
+2. **Polung kleiner SMD-Dioden nicht nach Augenmaß bestücken.** Der Kathodenstrich der
+   SOD-123-Diode war kaum zu erkennen, D2 wurde verpolt eingelötet. Sicherer: Diode vor
+   dem Einlöten mit dem Diodentest des Multimeters ausmessen und die Kathode markieren.
+3. **Messpunkte im Layout haben sich gelohnt.** TP1/TP2 und die Vorgabe, ohne ADC-Modul
    zu starten, haben jeden Fehler auf eine Stufe eingegrenzt, bevor das Modul gefährdet war.
-3. **Stecker und Buchsen sind die häufigste Fehlerquelle.** Wie schon beim
+4. **Stecker und Buchsen sind die häufigste Fehlerquelle.** Wie schon beim
    [Breadboard-Test](breadboard-test.md) war ein Kontakt am Modul die Ursache für
    unsinnige Messwerte.
-4. **Die Referenz begrenzt die Kalibrierung, nicht das Gerät.** Der VC97 löst über 4 V
+5. **Die Referenz begrenzt die Kalibrierung, nicht das Gerät.** Der VC97 löst über 4 V
    nur 10 mV auf. Die Verstärkungskalibrierung braucht ein besseres Referenzgerät.
 
 ## Offene Punkte
